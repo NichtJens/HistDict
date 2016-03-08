@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from random import randint
+import random
+random.seed(0)
 
 def throw1dice():
-    return randint(1, 6)
+    return random.randint(1, 6)
 
 def throwNdice(N):
     return sum(throw1dice() for _ in range(N))
@@ -18,8 +19,8 @@ for _ in range(10000):
     HD1.fill(throw1dice())
     HD2.fill(throwNdice(2))
 
-print HD1.mean, HD1.stddev
-print HD2.mean, HD2.stddev
+print HD1.posMax, HD1.mean, HD1.stddev
+print HD2.posMax, HD2.mean, HD2.stddev
 
 
 from matplotlib import pyplot as plt
