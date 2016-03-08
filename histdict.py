@@ -44,6 +44,26 @@ class HistDict(defaultdict):
         return zip(*sorted(self.items()))
 
 
+    def _yx(self):
+        return ((y, x) for x, y in self.items())
+
+    @property
+    def posMin(self):
+        return min(self._yx())[1]
+
+    @property
+    def posMax(self):
+        return max(self._yx())[1]
+
+    @property
+    def posSorted(self):
+        return [(x, y) for y, x in sorted(self._yx())]
+
+    @property
+    def xySorted(self):
+        return zip(*self.posSorted)
+
+
     @property
     def integral(self):
         return sum(y*x for x, y in self.items())
@@ -57,6 +77,8 @@ class HistDict(defaultdict):
         c = self.count
         if not c: return None
         return self.integral / c
+
+    mu = mean
 
     @property
     def variance(self):
@@ -87,7 +109,6 @@ class HistDict(defaultdict):
 #rebin?
 #multipy, extend, merge 2 hists
 #skewness, kurtosis, ...
-#bin of max
 #fft
 
 
